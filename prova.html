@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ESTERMAX S.r.l. – Disinfestazioni Professionali Roma</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-dark: #0b1120;
+    --bg-mid: #0f1d14;
+    --bg-card: #131f10;
+    --green: #5eda6f;
+    --green-dim: #2e7d3e;
+    --yellow: #f5d547;
+    --text: #e8ede4;
+    --text-muted: #93a48a;
+    --border: rgba(94,218,111,0.18);
+    --radius: 4px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ───── NAV ───── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    background: rgba(11,17,32,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--green);
+    text-decoration: none;
+  }
+  .logo span { color: var(--yellow); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: var(--green);
+    color: #0b1120 !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: var(--radius);
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: #7aed8a !important; color: #0b1120 !important; }
+
+  /* hamburger */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { width: 24px; height: 2px; background: var(--text); display: block; transition: 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
+    background: var(--bg-dark); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1.5rem 5%; gap: 1.2rem; z-index: 99;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--text-muted); text-decoration: none; font-size: 1rem;
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--green); }
+
+  /* ───── HERO ───── */
+  #home {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 80px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 50%, rgba(94,218,111,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(245,213,71,0.04) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(var(--green) 1px, transparent 1px),
+      linear-gradient(90deg, var(--green) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(94,218,111,0.12);
+    border: 1px solid rgba(94,218,111,0.3);
+    color: var(--green);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.6s ease both;
+  }
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: 2px;
+    margin-bottom: 1.2rem;
+    animation: fadeInUp 0.6s 0.1s ease both;
+  }
+  h1 .accent { color: var(--green); }
+  h1 .accent2 { color: var(--yellow); }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    animation: fadeInUp 0.6s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeInUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--green);
+    color: #0b1120;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #7aed8a; transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-block;
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3.5rem;
+    animation: fadeInUp 0.6s 0.4s ease both;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--green);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  /* ───── SECTIONS ───── */
+  section { padding: 90px 5%; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--green); font-weight: 700; margin-bottom: 0.8rem;
+  }
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700; letter-spacing: 1px;
+    line-height: 1.1; margin-bottom: 1rem;
+  }
+  .section-intro { color: var(--text-muted); max-width: 540px; font-size: 1.05rem; font-weight: 300; }
+
+  /* ───── SERVIZI ───── */
+  #servizi { background: var(--bg-mid); }
+  .servizi-header { margin-bottom: 3.5rem; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .service-card {
+    background: var(--bg-dark);
+    padding: 2rem 1.8rem;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--green); transform: scaleX(0);
+    transform-origin: left; transition: transform 0.3s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: var(--bg-card); }
+  .service-icon {
+    font-size: 2.2rem; margin-bottom: 1rem; display: block;
+  }
+  .service-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem; font-weight: 600; letter-spacing: 1px;
+    margin-bottom: 0.6rem; color: var(--text);
+  }
+  .service-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+  .service-tag {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--green); font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid rgba(94,218,111,0.25);
+    border-radius: 2px;
+  }
+
+  /* ───── CHI SIAMO ───── */
+  #chi-siamo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-img-box {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+    position: relative; overflow: hidden;
+  }
+  .about-img-box::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(94,218,111,0.06), transparent 60%);
+  }
+  .about-badge-card {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--green);
+    color: #0b1120;
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    font-family: 'Oswald', sans-serif;
+  }
+  .about-badge-card .num { font-size: 2.5rem; font-weight: 700; line-height: 1; }
+  .about-badge-card .txt { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+  .about-text h2 { margin-bottom: 1.2rem; }
+  .about-text p { color: var(--text-muted); margin-bottom: 1rem; font-weight: 300; font-size: 0.97rem; }
+  .cert-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+  .cert-pill {
+    background: rgba(94,218,111,0.08);
+    border: 1px solid rgba(94,218,111,0.2);
+    color: var(--green);
+    font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+    padding: 0.35rem 0.85rem; border-radius: 20px;
+  }
+
+  /* ───── PERCHÉ NOI ───── */
+  #perche { background: var(--bg-mid); }
+  .perche-header { text-align: center; margin-bottom: 3.5rem; }
+  .perche-header .section-intro { margin: 0 auto; text-align: center; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+  .feature-item { text-align: center; padding: 2rem 1rem; }
+  .feature-icon-wrap {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(94,218,111,0.1);
+    border: 1.5px solid rgba(94,218,111,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin: 0 auto 1.2rem;
+  }
+  .feature-item h3 {
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem;
+    letter-spacing: 1px; margin-bottom: 0.5rem;
+  }
+  .feature-item p { font-size: 0.88rem; color: var(--text-muted); }
+
+  /* ───── TESTIMONIANZE ───── */
+  .testi-header { margin-bottom: 3.5rem; }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .testi-card {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    position: relative;
+  }
+  .quote-mark {
+    font-family: 'Oswald', sans-serif;
+    font-size: 5rem; line-height: 0.6;
+    color: rgba(94,218,111,0.15);
+    position: absolute; top: 1.2rem; right: 1.5rem;
+    font-weight: 700;
+  }
+  .stars { color: var(--yellow); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testi-card p { font-size: 0.95rem; color: var(--text-muted); font-weight: 300; font-style: italic; margin-bottom: 1.5rem; }
+  .testi-author { display: flex; align-items: center; gap: 0.8rem; }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(94,218,111,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 700;
+    color: var(--green); flex-shrink: 0;
+  }
+  .author-name { font-weight: 700; font-size: 0.9rem; }
+  .author-role { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ───── CONTATTI ───── */
+  #contatti { background: var(--bg-mid); }
+  .contatti-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contatti-info h2 { margin-bottom: 1rem; }
+  .contatti-info p { color: var(--text-muted); margin-bottom: 2rem; font-weight: 300; }
+  .contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+  .contact-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: rgba(94,218,111,0.1);
+    border: 1px solid rgba(94,218,111,0.25);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  }
+  .contact-item-text strong { display: block; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green); margin-bottom: 2px; }
+  .contact-item-text span { color: var(--text-muted); font-size: 0.95rem; }
+
+  /* Form */
+  .form-card {
+    background: var(--bg-dark);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 2.5rem;
+  }
+  .form-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem; font-weight: 700; letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius);
+    color: var(--text);
+    padding: 0.7rem 1rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--green); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select option { background: #0b1120; }
+  .form-submit {
+    width: 100%;
+    background: var(--green); color: #0b1120;
+    border: none; cursor: pointer;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 0.9rem;
+    border-radius: var(--radius);
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: #7aed8a; transform: translateY(-2px); }
+  .form-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 0.8rem; }
+
+  /* ───── FOOTER ───── */
+  footer {
+    background: #060d0a;
+    border-top: 1px solid var(--border);
+    padding: 3rem 5% 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand .logo { font-size: 1.4rem; display: inline-block; margin-bottom: 0.8rem; }
+  .footer-brand p { color: var(--text-muted); font-size: 0.88rem; font-weight: 300; line-height: 1.6; }
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text); margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--green); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.82rem; color: var(--text-muted); }
+  .footer-bottom span { color: var(--green); }
+
+  /* ───── ALERT BANNER ───── */
+  .alert-bar {
+    background: var(--green); color: #0b1120;
+    text-align: center;
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+  }
+
+  /* ───── ANIMATIONS ───── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 900px) {
+    #chi-siamo { grid-template-columns: 1fr; gap: 3rem; }
+    .about-badge-card { bottom: -10px; right: 10px; }
+    .contatti-wrapper { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Alert Bar -->
+<div class="alert-bar">🛡️ Intervento d'Urgenza 24/7 – Chiama Ora: +39 06 4521 8899</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#home" class="logo">ESTER<span>MAX</span></a>
+  <ul class="nav-links">
+    <li><a href="#servizi">Servizi</a></li>
+    <li><a href="#chi-siamo">Chi Siamo</a></li>
+    <li><a href="#perche">Perché Noi</a></li>
+    <li><a href="#testimonianze">Recensioni</a></li>
+    <li><a href="#contatti" class="nav-cta">Preventivo Gratis</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servizi">Servizi</a>
+  <a href="#chi-siamo">Chi Siamo</a>
+  <a href="#perche">Perché Noi</a>
+  <a href="#testimonianze">Recensioni</a>
+  <a href="#contatti">Preventivo Gratis</a>
+</div>
+
+<!-- Hero -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Roma · Attivi dal 1994</div>
+    <h1>
+      ELIMINARE I<br>
+      <span class="accent">PARASSITI</span><br>
+      È IL NOSTRO<br>
+      <span class="accent2">LAVORO.</span>
+    </h1>
+    <p class="hero-sub">
+      Disinfestazioni professionali per abitazioni, aziende e strutture ricettive.
+      Prodotti certificati, personale qualificato, risultati garantiti.
+    </p>
+    <div class="hero-actions">
+      <a href="#contatti" class="btn-primary">Richiedi Preventivo</a>
+      <a href="#servizi" class="btn-outline">I Nostri Servizi</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">3.200+</div>
+        <div class="stat-label">Interventi/anno</div>
+      </div>
+      <div>
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Soddisfazione</div>
+      </div>
+      <div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Anni d'esperienza</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Servizi -->
+<section id="servizi">
+  <div class="servizi-header">
+    <div class="section-label">– Cosa Facciamo</div>
+    <h2>I Nostri Servizi</h2>
+    <p class="section-intro">Dalla prevenzione all'eradicazione: affrontiamo ogni infestazione con protocolli mirati e prodotti di ultima generazione.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🐀</span>
+      <h3>Derattizzazione</h3>
+      <p>Eliminazione di ratti e topi con sistemi di cattura, esche rodenticide certificate e sigillatura dei punti d'accesso.</p>
+      <span class="service-tag">Residenziale · Industriale</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🪳</span>
+      <h3>Disinfestazione Blatte</h3>
+      <p>Trattamenti gel, spray e termodisinfezione per eliminare gli scarafaggi negli angoli più difficili da raggiungere.</p>
+      <span class="service-tag">Cucine · Alberghi · Bar</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🦟</span>
+      <h3>Zanzare e Ditteri</h3>
+      <p>Nebulizzazioni a freddo e caldo, installazione di trappole UV e trattamento di aree verdi per ridurre le popolazioni.</p>
+      <span class="service-tag">Estivo · Preventivo</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🐜</span>
+      <h3>Infestanti da Immagazzinamento</h3>
+      <p>Fumigazione e trattamenti localizzati contro coleotteri, tarme, e infestanti che colpiscono derrate alimentari e archivi.</p>
+      <span class="service-tag">Magazzini · Musei</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🦠</span>
+      <h3>Sanificazione & Igienizzazione</h3>
+      <p>Trattamento con ozono e biocidi per la sanificazione profonda di ambienti civili, sanitari e ristorativi.</p>
+      <span class="service-tag">Certificato HACCP</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🕊️</span>
+      <h3>Piccioni e Volatili</h3>
+      <p>Sistemi dissuasori fisici — reti, spine anti-posatoi, gel olfattivi — per la gestione etica degli uccelli infestanti.</p>
+      <span class="service-tag">Edifici · Condomini</span>
+    </div>
+  </div>
+</section>
+
+<!-- Chi Siamo -->
+<section id="chi-siamo">
+  <div class="about-visual">
+    <div class="about-img-box">🏢</div>
+    <div class="about-badge-card">
+      <div class="num">ISO</div>
+      <div class="txt">9001 Certificato</div>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="section-label">– Chi Siamo</div>
+    <h2>Trent'anni di<br>esperienza sul campo</h2>
+    <p>Fondata a Roma nel 1994, <strong>ESTERMAX S.r.l.</strong> è diventata uno dei punti di riferimento per la disinfestazione professionale nel Lazio. Operiamo con un team di oltre 20 tecnici certificati, costantemente aggiornati sulle ultime normative e tecnologie.</p>
+    <p>La nostra filosofia è semplice: ogni infestazione è unica e richiede un'analisi su misura. Non utilizziamo protocolli standardizzati, ma progettiamo piani d'intervento personalizzati per ogni cliente.</p>
+    <p>Tutti i nostri prodotti sono omologati dal Ministero della Salute e rispettano le normative europee per la sicurezza di persone, animali e ambiente.</p>
+    <div class="cert-list">
+      <span class="cert-pill">Reg. CE 528/2012</span>
+      <span class="cert-pill">ISO 9001:2015</span>
+      <span class="cert-pill">HACCP Compliant</span>
+      <span class="cert-pill">Camera di Commercio RM</span>
+    </div>
+  </div>
+</section>
+
+<!-- Perché Noi -->
+<section id="perche">
+  <div class="perche-header">
+    <div class="section-label">– I Nostri Punti di Forza</div>
+    <h2>Perché Scegliere ESTERMAX</h2>
+    <p class="section-intro">Non siamo solo disinfestatori: siamo consulenti che proteggono la tua salute e la tua proprietà.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon-wrap">🕐</div>
+      <h3>Intervento Rapido</h3>
+      <p>Garantiamo l'intervento entro 4 ore dalla chiamata per le emergenze, 7 giorni su 7.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon-wrap">🔬</div>
+      <h3>Prodotti Eco-Certified</h3>
+      <p>Solo biocidi di classe professionale, sicuri per famiglie, animali domestici e ambienti alimentari.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon-wrap">📋</div>
+      <h3>Reportistica Completa</h3>
+      <p>Forniamo documentazione dettagliata di ogni intervento, utile per audit HACCP e certificazioni.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon-wrap">🛡️</div>
+      <h3>Garanzia di Risultato</h3>
+      <p>Se l'infestazione persiste entro 30 giorni dall'intervento, torniamo senza costi aggiuntivi.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon-wrap">🌿</div>
+      <h3>Approccio IPM</h3>
+      <p>Seguiamo la gestione integrata dei parassiti (IPM) per minimizzare l'impatto ambientale.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon-wrap">💳</div>
+      <h3>Contratti Annuali</h3>
+      <p>Piani di manutenzione preventiva per aziende, ristoranti e strutture ricettive con tariffe vantaggiose.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonianze -->
+<section id="testimonianze">
+  <div class="testi-header">
+    <div class="section-label">– Cosa Dicono di Noi</div>
+    <h2>Clienti Soddisfatti</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p>Professionali e puntuali. Dopo anni di problemi con gli scarafaggi nel mio ristorante, finalmente siamo a posto. Il tecnico è stato esaustivo nella spiegazione e nel report HACCP. Consigliato al 100%.</p>
+      <div class="testi-author">
+        <div class="avatar">MR</div>
+        <div>
+          <div class="author-name">Marco Ricci</div>
+          <div class="author-role">Titolare – Trattoria da Marco, Trastevere</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p>Chiamati alle 22 per un'emergenza con i topi in un magazzino. Tecnico in loco entro 2 ore. Problema risolto in meno di 24 ore. Servizio eccellente, prezzi onesti.</p>
+      <div class="testi-author">
+        <div class="avatar">SF</div>
+        <div>
+          <div class="author-name">Sara Ferretti</div>
+          <div class="author-role">Responsabile logistica – Ferretto & Co. S.r.l.</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p>Abbiamo sottoscritto un contratto annuale per il nostro hotel a Roma. Da allora zero problemi con zanzare e blatte. Il personale ESTERMAX è discreto e opera senza disturbare gli ospiti.</p>
+      <div class="testi-author">
+        <div class="avatar">LM</div>
+        <div>
+          <div class="author-name">Lucia Mancini</div>
+          <div class="author-role">Hotel Manager – Palazzo Indigo Roma ★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contatti -->
+<section id="contatti">
+  <div class="contatti-wrapper">
+    <div class="contatti-info">
+      <div class="section-label">– Contattaci</div>
+      <h2>Richiedi un Preventivo Gratuito</h2>
+      <p>Il nostro team risponde entro 2 ore in orario lavorativo. Per urgenze, siamo disponibili 24/7.</p>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-item-text">
+          <strong>Telefono</strong>
+          <span>+39 06 4521 8899</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-item-text">
+          <strong>Email</strong>
+          <span>info@estermaxsrl.it</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-item-text">
+          <strong>Sede Operativa</strong>
+          <span>Via Tiburtina 148, 00185 Roma (RM)</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕗</div>
+        <div class="contact-item-text">
+          <strong>Orari Ufficio</strong>
+          <span>Lun–Ven 8:00–18:00 · Sab 9:00–13:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-card">
+      <h3>Richiesta di Intervento</h3>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-nome">Nome</label>
+            <input id="f-nome" name="nome" type="text" placeholder="Mario" required />
+          </div>
+          <div class="form-group">
+            <label for="f-cognome">Cognome</label>
+            <input id="f-cognome" name="cognome" type="text" placeholder="Rossi" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-tel">Telefono</label>
+            <input id="f-tel" name="telefono" type="tel" placeholder="+39 ..." required />
+          </div>
+          <div class="form-group">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" placeholder="mario@esempio.it" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="f-tipo">Tipo di Infestazione</label>
+          <select id="f-tipo" name="tipo_infestazione" required>
+            <option value="">– Seleziona –</option>
+            <option>Ratti / Topi</option>
+            <option>Blatte / Scarafaggi</option>
+            <option>Zanzare / Insetti Volanti</option>
+            <option>Formiche / Infestanti da Immagazzinamento</option>
+            <option>Piccioni / Volatili</option>
+            <option>Sanificazione</option>
+            <option>Altro / Non so</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-note">Note aggiuntive</label>
+          <textarea id="f-note" name="note" placeholder="Descrivi brevemente la situazione e indica l'indirizzo dell'immobile..."></textarea>
+        </div>
+        <button class="form-submit" type="submit" id="submitBtn">Invia Richiesta</button>
+        <p class="form-note" id="formMsg" style="margin-top:0.8rem; min-height:1.2em;"></p>
+        <p class="form-note">🔒 I tuoi dati sono trattati nel rispetto del GDPR · Reg. UE 2016/679</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#home" class="logo">ESTER<span>MAX</span></a>
+      <p>Disinfestazioni professionali dal 1994. Proteggiamo la tua salute e la tua proprietà con soluzioni certificate e garantite.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servizi</h4>
+      <ul>
+        <li><a href="#servizi">Derattizzazione</a></li>
+        <li><a href="#servizi">Disinfestazione Blatte</a></li>
+        <li><a href="#servizi">Zanzare & Ditteri</a></li>
+        <li><a href="#servizi">Piccioni & Volatili</a></li>
+        <li><a href="#servizi">Sanificazione</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Azienda</h4>
+      <ul>
+        <li><a href="#chi-siamo">Chi Siamo</a></li>
+        <li><a href="#perche">Perché Noi</a></li>
+        <li><a href="#testimonianze">Recensioni</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+        <li><a href="#">Blog & News</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legale</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Termini di Servizio</a></li>
+        <li><a href="#">Note Legali</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 ESTERMAX S.r.l. – P.IVA: 14582736091 – REA: RM-987654<br>Via Tiburtina 148, 00185 Roma (RM)</p>
+    <p>Realizzato con <span>♥</span> a Roma</p>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Navbar shrink on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.height = window.scrollY > 50 ? '56px' : '64px';
+  });
+
+  // Smooth scroll for anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 70;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Formspree form submission
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('formMsg');
+      btn.disabled = true;
+      btn.textContent = 'Invio in corso...';
+      msg.style.color = '';
+      msg.textContent = '';
+
+      // ⚠️ Sostituisci xkoedpaj con il tuo ID Formspree (es. xpwzabcd)
+      const FORMSPREE_ID = 'xkoedpaj';
+
+      try {
+        const data = new FormData(form);
+        const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          msg.style.color = '#5eda6f';
+          msg.textContent = '✓ Richiesta inviata! Ti contatteremo al più presto.';
+          form.reset();
+          btn.textContent = '✓ Inviato';
+          btn.style.background = '#2e7d3e';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        msg.style.color = '#f87171';
+        msg.textContent = '✗ Errore durante l\'invio. Riprova o chiamaci al +39 06 4521 8899.';
+        btn.disabled = false;
+        btn.textContent = 'Invia Richiesta';
+      }
+    });
+  }
+</script>
+</body>
+</html>
